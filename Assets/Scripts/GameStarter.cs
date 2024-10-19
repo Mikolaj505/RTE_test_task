@@ -1,6 +1,6 @@
 ﻿using Fusion;
 using MKubiak.Services;
-using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace MKubiak.RTETestTask.GameStartup
 {
@@ -22,15 +22,15 @@ namespace MKubiak.RTETestTask.GameStartup
 
             void OnGameStarted(NetworkRunner runner)
             {
+                var menuSceneRef = SceneRef.FromIndex(1);
+                sceneManager.UnloadScene(menuSceneRef);
+
                 if (runner.IsSceneAuthority)
                 {
-                    var menuSceneRef = SceneRef.FromIndex(1);
-                    sceneManager.UnloadScene(menuSceneRef);
-
                     foreach (var sceneIdx in gameStartInfo.GameplaySceneIndexes)
                     {
                         var sceneRef = SceneRef.FromIndex(sceneIdx);
-                        sceneManager.LoadScene(sceneRef, new NetworkLoadSceneParameters());
+                        runner.LoadScene(sceneRef, LoadSceneMode.Additive);
                     }
                 }
             }
