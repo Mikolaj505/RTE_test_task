@@ -3,6 +3,7 @@ using Fusion.Sockets;
 using MKubiak.Services;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MKubiak.RTETestTask
@@ -16,6 +17,7 @@ namespace MKubiak.RTETestTask
         public NetworkRunner CreateNetworkRunner()
         {
             NetworkRunner = Instantiate(_networkRunnerPrefab);
+            NetworkRunner.AddComponent<NetworkGameplayManager>();
             return NetworkRunner;
         }
 
