@@ -1,4 +1,5 @@
-﻿using Fusion;
+﻿using deVoid.Utils;
+using Fusion;
 using Fusion.Sockets;
 using MKubiak.Services;
 using System;
@@ -41,7 +42,7 @@ namespace MKubiak.RTETestTask
 
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
-            
+            Signals.Get<OnInputSignal>().Dispatch(runner, input);
         }
 
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)

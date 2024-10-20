@@ -1,9 +1,10 @@
-﻿using Fusion;
+﻿using deVoid.Utils;
+using Fusion;
 using UnityEngine;
 
 namespace MKubiak.RTETestTask.Input
 {
-    public class PlayerInputController : MonoBehaviour
+    public class PlayerInputController : NetworkBehaviour
     {
         [SerializeField] private PlayerInputActions _inputActions;
 
@@ -15,15 +16,34 @@ namespace MKubiak.RTETestTask.Input
             _inputActions.PlayerMap.Enable();
         }
 
-        private void Update()
+        public override void Spawned()
+        {
+            if (HasInputAuthority)
+            {
+                // Register local player input polling.
+                Signals.Get<OnInputSignal>().AddListener(OnInput);
+            }
+        }
+
+        public override void Despawned(NetworkRunner runner, bool hasState)
+        {
+                Signals.Get<OnInputSignal>().RemoveListener(OnInput);
+        }
+
+        private void OnInput(NetworkRunner runner, NetworkInput networkInput)
+        {
+            networkInput.Set(PlayerInput);
+
+            Debug.Log($"Player Input {PlayerInput.Movement} :: {PlayerInput.Look}");
+        }
+
+        public override void Render()
         {
             PlayerInput = new()
             {
                 Movement = _inputActions.PlayerMap.Movement.ReadValue<Vector2>(),
                 Look = _inputActions.PlayerMap.Look.ReadValue<Vector2>()
             };
-
-            Debug.Log($"Movement {PlayerInput.Movement}, Look {PlayerInput.Look}");
         }
     }
 
