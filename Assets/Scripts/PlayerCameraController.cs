@@ -36,7 +36,7 @@ namespace MKubiak.RTETestTask
                 return;
             }
 
-            // '-' so the pitch normally comes as input up is camera going up, and input down is camera going down.
+            // '-' so the pitch normally comes as input up is camera going up, and input down is camera going down. If preferred, it can be reverted with _inversePitch.
             var motorRotation = -_motor.GetLookRotation();
             _cameraTarget.localRotation = Quaternion.Euler(motorRotation.x * (_inversePitch ? -1f : 1f) , 0, 0);
         }
