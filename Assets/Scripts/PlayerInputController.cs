@@ -8,6 +8,8 @@ namespace MKubiak.RTETestTask.Input
     {
         [SerializeField] private PlayerInputActions _inputActions;
 
+        [SerializeField] private float _mouseSensitivity = 5f;
+
         public PlayerInput PlayerInput { get; private set; }
 
         private void Awake()
@@ -35,14 +37,19 @@ namespace MKubiak.RTETestTask.Input
             networkInput.Set(PlayerInput);
 
             Debug.Log($"Player Input {PlayerInput.Movement} :: {PlayerInput.Look}");
+
+            PlayerInput = new PlayerInput();
         }
 
         public override void Render()
         {
+            var lookInput = _inputActions.PlayerMap.Look.ReadValue<Vector2>() * _mouseSensitivity;
+            var reversedLookInput = new Vector2(lookInput.y, lookInput.x);
+
             PlayerInput = new()
             {
                 Movement = _inputActions.PlayerMap.Movement.ReadValue<Vector2>(),
-                Look = _inputActions.PlayerMap.Look.ReadValue<Vector2>()
+                Look = PlayerInput.Look + reversedLookInput
             };
         }
     }

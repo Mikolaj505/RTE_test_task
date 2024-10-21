@@ -11,7 +11,7 @@ namespace MKubiak.RTETestTask
 
         private void Awake()
         {
-            _motor = GetComponent<KCC>();
+            _motor = GetComponent<PlayerFacade>().Motor;
         }
 
         public override void FixedUpdateNetwork()
