@@ -372,6 +372,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5299204706033854093}
+    - targetCorrespondingSourceObject: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2196621668200228404}
   m_SourcePrefab: {fileID: 100100000, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
 --- !u!4 &4524655407572593186 stripped
 Transform:
@@ -446,3 +449,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraTarget: {fileID: 3861134226792423354}
   _inversePitch: 0
+--- !u!114 &2196621668200228404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464555564920399013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d6c186bab24364d9ac3bf4551abb57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionsSet: {fileID: 11400000, guid: e937a4de0837f4b46b190d40369c3bf1, type: 2}
+  minDistanceToInteract: 3.5
+  updateInteractionsSelectionInterval: 0.3
