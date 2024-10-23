@@ -12,10 +12,9 @@ namespace MKubiak.RTETestTask
 
         private KCC _motor;
 
-        private void Start()
+        private void Awake()
         {
             _motor = GetComponent<PlayerFacade>().Motor;
-
         }
 
         public override void Spawned()
@@ -40,5 +39,10 @@ namespace MKubiak.RTETestTask
             var motorRotation = -_motor.GetLookRotation();
             _cameraTarget.localRotation = Quaternion.Euler(motorRotation.x * (_inversePitch ? -1f : 1f) , 0, 0);
         }
+    }
+
+    public class Interaction : NetworkBehaviour, IKCCInteractionProvider
+    {
+        
     }
 }
