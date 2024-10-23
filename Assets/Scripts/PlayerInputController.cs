@@ -36,8 +36,6 @@ namespace MKubiak.RTETestTask.Input
         {
             networkInput.Set(PlayerInput);
 
-            Debug.Log($"Player Input {PlayerInput.Movement} :: {PlayerInput.Look}");
-
             PlayerInput = new PlayerInput();
         }
 

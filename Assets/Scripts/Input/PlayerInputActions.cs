@@ -46,6 +46,15 @@ namespace MKubiak.RTETestTask.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""6961f1cf-0585-4dd0-a473-7636918e5a38"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -114,6 +123,17 @@ namespace MKubiak.RTETestTask.Input
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""034e2939-15cf-49d8-a1e4-a9429b49c465"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -124,6 +144,7 @@ namespace MKubiak.RTETestTask.Input
             m_PlayerMap = asset.FindActionMap("PlayerMap", throwIfNotFound: true);
             m_PlayerMap_Movement = m_PlayerMap.FindAction("Movement", throwIfNotFound: true);
             m_PlayerMap_Look = m_PlayerMap.FindAction("Look", throwIfNotFound: true);
+            m_PlayerMap_Interact = m_PlayerMap.FindAction("Interact", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -187,12 +208,14 @@ namespace MKubiak.RTETestTask.Input
         private List<IPlayerMapActions> m_PlayerMapActionsCallbackInterfaces = new List<IPlayerMapActions>();
         private readonly InputAction m_PlayerMap_Movement;
         private readonly InputAction m_PlayerMap_Look;
+        private readonly InputAction m_PlayerMap_Interact;
         public struct PlayerMapActions
         {
             private @PlayerInputActions m_Wrapper;
             public PlayerMapActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_PlayerMap_Movement;
             public InputAction @Look => m_Wrapper.m_PlayerMap_Look;
+            public InputAction @Interact => m_Wrapper.m_PlayerMap_Interact;
             public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -208,6 +231,9 @@ namespace MKubiak.RTETestTask.Input
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
 
             private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -218,6 +244,9 @@ namespace MKubiak.RTETestTask.Input
                 @Look.started -= instance.OnLook;
                 @Look.performed -= instance.OnLook;
                 @Look.canceled -= instance.OnLook;
+                @Interact.started -= instance.OnInteract;
+                @Interact.performed -= instance.OnInteract;
+                @Interact.canceled -= instance.OnInteract;
             }
 
             public void RemoveCallbacks(IPlayerMapActions instance)
@@ -239,6 +268,7 @@ namespace MKubiak.RTETestTask.Input
         {
             void OnMovement(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
+            void OnInteract(InputAction.CallbackContext context);
         }
     }
 }
