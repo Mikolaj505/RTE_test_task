@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactLabel: {fileID: 6705094914077795590}
+  _interactionCooldown: 3
 --- !u!114 &3142020069816127220
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,16 +1,18 @@
-﻿using MKubiak.RTETestTask.InteractionSystem;
+﻿using Fusion;
+using MKubiak.RTETestTask.Input;
+using MKubiak.RTETestTask.InteractionSystem;
 using UnityEngine;
 
 namespace MKubiak.RTETestTask
 {
-    public class PlayerInteractionsController : MonoBehaviour
+    public class PlayerInteractionsController : NetworkBehaviour
     {
         [SerializeField] private InteractionsRuntimeSet _interactionsSet;
         [SerializeField] private float minDistanceToInteract;
         [SerializeField] private float updateInteractionsSelectionInterval = 0.3f;
 
-
         private PlayerFacade _playerFacade;
+        private PlayerInputController _inputController;
         private IInteractable? _selectedInteractable;
         private Throttle _updateSelectionThrottle;
 
@@ -18,6 +20,7 @@ namespace MKubiak.RTETestTask
         {
             _playerFacade = GetComponent<PlayerFacade>();
             _updateSelectionThrottle = new Throttle(updateInteractionsSelectionInterval);
+            _inputController = _playerFacade.Input;
         }
 
         private void Update()
@@ -25,6 +28,14 @@ namespace MKubiak.RTETestTask
             if (_updateSelectionThrottle.IsReadyToUse(Time.time))
             {
                 UpdateInteractionsSelection();
+            }
+        }
+
+        public override void Render()
+        {
+            if (_inputController.WasActivated(PlayerInputAction.Interact))
+            {
+                _selectedInteractable?.Interact(_playerFacade);
             }
         }
 

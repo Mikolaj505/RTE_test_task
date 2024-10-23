@@ -1,16 +1,22 @@
 ﻿using deVoid.Utils;
 using Fusion;
+using UnityEditor;
 using UnityEngine;
 
 namespace MKubiak.RTETestTask.Input
 {
-    public class PlayerInputController : NetworkBehaviour
+    public class PlayerInputController : NetworkBehaviour, IBeforeTick
     {
         [SerializeField] private PlayerInputActions _inputActions;
 
         [SerializeField] private float _mouseSensitivity = 5f;
 
-        public PlayerInput PlayerInput { get; private set; }
+        private PlayerInput _playerInput;
+
+        private PlayerInput _previousNetworkInput;
+        private PlayerInput _networkInput;
+
+        public PlayerInput NetworkInput => _networkInput;
 
         private void Awake()
         {
@@ -34,9 +40,14 @@ namespace MKubiak.RTETestTask.Input
 
         private void OnInput(NetworkRunner runner, NetworkInput networkInput)
         {
-            networkInput.Set(PlayerInput);
+            networkInput.Set(_playerInput);
 
-            PlayerInput = new PlayerInput();
+            _playerInput = new PlayerInput()
+            {
+                Movement = Vector2.zero,
+                Look = Vector2.zero,
+                Interact = false
+            };
         }
 
         public override void Render()
@@ -44,17 +55,29 @@ namespace MKubiak.RTETestTask.Input
             var lookInput = _inputActions.PlayerMap.Look.ReadValue<Vector2>() * _mouseSensitivity;
             var reversedLookInput = new Vector2(lookInput.y, lookInput.x);
 
-            PlayerInput = new()
-            {
-                Movement = _inputActions.PlayerMap.Movement.ReadValue<Vector2>(),
-                Look = PlayerInput.Look + reversedLookInput
-            };
+            _playerInput.Movement = _inputActions.PlayerMap.Movement.ReadValue<Vector2>();
+            _playerInput.Look += reversedLookInput;
+            _playerInput.Interact |= _inputActions.PlayerMap.Interact.IsPressed();
         }
-    }
 
-    public struct PlayerInput : INetworkInput
-    {
-        public Vector2 Movement;
-        public Vector2 Look;
+        void IBeforeTick.BeforeTick() 
+        {
+            _previousNetworkInput = _networkInput;
+
+            if (Object.InputAuthority == PlayerRef.None)
+            {
+                return;
+            }
+
+            if (Runner.TryGetInputForPlayer(Object.InputAuthority, out PlayerInput playerInput))
+            {
+                _networkInput = playerInput;
+            }
+        }
+
+        public bool WasActivated(PlayerInputAction action)
+        {
+            return action.WasActivated(_networkInput, _previousNetworkInput);
+        }
     }
 }

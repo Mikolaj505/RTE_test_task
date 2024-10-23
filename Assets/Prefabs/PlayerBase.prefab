@@ -291,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[1]
@@ -309,6 +309,10 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[4]
       value: 
       objectReference: {fileID: 5299204706033854093}
+    - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[5]
+      value: 
+      objectReference: {fileID: 2196621668200228404}
     - target: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: m_Name
       value: PlayerBase
@@ -410,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Motor>k__BackingField: {fileID: 5542947587368128673}
+  <Input>k__BackingField: {fileID: 8632772905129855658}
 --- !u!114 &8632772905129855658
 MonoBehaviour:
   m_ObjectHideFlags: 0

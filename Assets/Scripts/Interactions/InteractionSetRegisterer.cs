@@ -14,10 +14,20 @@ namespace MKubiak.RTETestTask.InteractionSystem
 
         private void OnEnable()
         {
-            _set.Add(_interactable);
+            RegisterToSet();
         }
 
         private void OnDisable()
+        {
+            UnregisterFromSet();
+        }
+
+        public void RegisterToSet()
+        {
+            _set.Add(_interactable);
+        }
+
+        public void UnregisterFromSet()
         {
             _set.Remove(_interactable);
         }

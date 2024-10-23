@@ -8,21 +8,24 @@ namespace MKubiak.RTETestTask
     public class PlayerMovementController : NetworkBehaviour
     {
         private KCC _motor;
+        private PlayerInputController _inputController;
+
+        private PlayerInput PlayerInput => _inputController.NetworkInput;
 
         private void Awake()
         {
-            _motor = GetComponent<PlayerFacade>().Motor;
+            var playerFacade = GetComponent<PlayerFacade>();
+
+            _motor = playerFacade.Motor;
+            _inputController = playerFacade.Input;
         }
 
         public override void FixedUpdateNetwork()
         {
-            if (Runner.TryGetInputForPlayer(Object.InputAuthority, out PlayerInput input) == true)
-            {
-                _motor.AddLookRotation(input.Look);
+            _motor.AddLookRotation(PlayerInput.Look);
 
-                Vector3 inputDirection = _motor.Data.TransformRotation * new Vector3(input.Movement.x, 0.0f, input.Movement.y);
-                _motor.SetInputDirection(inputDirection);
-            }
+            Vector3 inputDirection = _motor.Data.TransformRotation * new Vector3(PlayerInput.Movement.x, 0.0f, PlayerInput.Movement.y);
+            _motor.SetInputDirection(inputDirection);
         }
     }
 }
