@@ -1,6 +1,5 @@
 ﻿using deVoid.Utils;
 using Fusion;
-using UnityEditor;
 using UnityEngine;
 
 namespace MKubiak.RTETestTask.Input
@@ -42,12 +41,7 @@ namespace MKubiak.RTETestTask.Input
         {
             networkInput.Set(_playerInput);
 
-            _playerInput = new PlayerInput()
-            {
-                Movement = Vector2.zero,
-                Look = Vector2.zero,
-                Interact = false
-            };
+            _playerInput = new PlayerInput();
         }
 
         public override void Render()
@@ -58,6 +52,7 @@ namespace MKubiak.RTETestTask.Input
             _playerInput.Movement = _inputActions.PlayerMap.Movement.ReadValue<Vector2>();
             _playerInput.Look += reversedLookInput;
             _playerInput.Interact |= _inputActions.PlayerMap.Interact.IsPressed();
+            _playerInput.Fire |= _inputActions.PlayerMap.Fire.IsPressed();
         }
 
         void IBeforeTick.BeforeTick() 

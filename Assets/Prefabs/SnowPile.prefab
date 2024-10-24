@@ -155,6 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactLabel: {fileID: 6705094914077795590}
   _interactionCooldown: 3
+  _snowThrowerWeaponConfig: {fileID: 11400000, guid: 1fbc46881a5f09f4e9dc7873e4a2ae80, type: 2}
+  _ammoToAdd: 1
 --- !u!114 &3142020069816127220
 MonoBehaviour:
   m_ObjectHideFlags: 0

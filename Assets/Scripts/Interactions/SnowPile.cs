@@ -1,4 +1,5 @@
 ﻿using Fusion;
+using MKubiak.RTETestTask.Weapons;
 using UnityEngine;
 
 namespace MKubiak.RTETestTask.InteractionSystem
@@ -7,6 +8,8 @@ namespace MKubiak.RTETestTask.InteractionSystem
     {
         [SerializeField] private InteractLabelUIController _interactLabel;
         [SerializeField] private float _interactionCooldown = 3;
+        [SerializeField] private WeaponConfig _snowThrowerWeaponConfig;
+        [SerializeField] private float _ammoToAdd;
 
         [Networked] private float CooldownTimeLeft { get; set; } = 0f;
 
@@ -27,7 +30,7 @@ namespace MKubiak.RTETestTask.InteractionSystem
                 return;
             }
 
-            //Disable interaction immediely on the local player
+            //Disable interaction immediely on the local player, CooldownTime would be later changed to match with server
             OnDeselected(interactor);
             CooldownTimeLeft = _interactionCooldown;
 
@@ -98,11 +101,9 @@ namespace MKubiak.RTETestTask.InteractionSystem
 
         private void HandleInteraction(PlayerFacade interactor)
         {
-            OnDeselected(interactor);
-            CooldownTimeLeft = _interactionCooldown;
             Debug.Log($"We got interaction!!! {interactor.name}");
-
             DisableInteraction();
+            interactor.Weapons.GetWeapon(_snowThrowerWeaponConfig.ID).AddAmmo(_ammoToAdd);
         }
     }
 }
