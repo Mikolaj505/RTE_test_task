@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1598557717827749380}
   - component: {fileID: 3779725947962402259}
   - component: {fileID: 2584708322306272735}
+  - component: {fileID: 6778734218225756709}
   m_Layer: 0
   m_Name: Snowball
   m_TagString: Untagged
@@ -46,6 +47,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b72d342ed5abbc43890421453473945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forwardVelocityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.9973755
+      inSlope: -0.014615173
+      outSlope: -0.014615173
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.20887162
+    - serializedVersion: 3
+      time: 0.8270088
+      value: 0.51102674
+      inSlope: -1.7987571
+      outSlope: -2.462971
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.17621379
+      outWeight: 0.5891278
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -4.125629
+      outSlope: -4.125629
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3805392
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _velocityEvaluationDuration: 2
+  _velocity: 22.5
+  _gravityEffectWeight: 0.1
 --- !u!114 &2584708322306272735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +101,23 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3779725947962402259}
+  - {fileID: 6778734218225756709}
+--- !u!114 &6778734218225756709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886538698553675699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1001 &8057031194883737916
 PrefabInstance:
   m_ObjectHideFlags: 0

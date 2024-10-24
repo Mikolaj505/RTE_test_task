@@ -1,4 +1,5 @@
 ﻿using Fusion;
+using Fusion.Addons.KCC;
 using UnityEngine;
 
 namespace MKubiak.RTETestTask.Weapons
@@ -24,9 +25,18 @@ namespace MKubiak.RTETestTask.Weapons
         {
             if (Ammo > 0 && _isHoldingASnowball == false)
             {
-                _heldSnowbalVisual.SetActive(true);
-                _isHoldingASnowball = true;
+                SetHeldSnowballVisualActive(true);
             }
+            else if (_isHoldingASnowball)
+            {
+                SetHeldSnowballVisualActive(false);
+            }
+        }
+
+        private void SetHeldSnowballVisualActive(bool active)
+        {
+            _heldSnowbalVisual.SetActive(active);
+            _isHoldingASnowball = active;
         }
 
         public override void FixedUpdateNetwork()
@@ -42,8 +52,23 @@ namespace MKubiak.RTETestTask.Weapons
 
         public void OnFireDown()
         {
+            if (HasStateAuthority == false)
+            {
+                return;
+            }
+
             if (Ammo > 0)
             {
+                Runner.Spawn(_snowballPrefab,
+                    _heldSnowbalVisual.transform.position,
+                    _heldSnowbalVisual.transform.rotation,
+                    Object.InputAuthority,
+                    (runner, networkObject) =>
+                    {
+                        networkObject.GetComponentNoAlloc<SnowballController>().Fire();
+                    }
+                    );
+
                 Debug.Log($"Fire!!!");
                 Ammo--;
             }
