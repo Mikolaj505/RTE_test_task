@@ -17,15 +17,6 @@ namespace MKubiak.RTETestTask.Weapons
 
         private RaycastHit[] _hitResults;
 
-        private enum SnowballState
-        {
-            None,
-            Thrown,
-            Hit,
-        }
-
-        private SnowballState State { get; set; }
-
         private void Awake()
         {
             _hitResults = new RaycastHit[_maxRaycastHitsChecked];
@@ -33,25 +24,15 @@ namespace MKubiak.RTETestTask.Weapons
 
         public void Fire()
         {
-            State = SnowballState.Thrown;
             FlightTimer = TickTimer.CreateFromSeconds(Runner, _velocityEvaluationDuration);
         }
 
         public override void FixedUpdateNetwork()
         {
-            switch (State)
-            {
-                case SnowballState.None:
-                    break;
-                case SnowballState.Thrown:
-                    UpdateThrownState();
-                    break;
-                case SnowballState.Hit:
-                    break;
-            }
+            UpdateThrownState();
         }
 
-        public void UpdateThrownState()
+        private void UpdateThrownState()
         {
             var flightProgress = Mathf.InverseLerp(0, _velocityEvaluationDuration, _velocityEvaluationDuration - FlightTimer.RemainingTime(Runner) ?? 0);
             var evaluatedVelocityFactor = _forwardVelocityCurve.Evaluate(flightProgress);
@@ -64,55 +45,21 @@ namespace MKubiak.RTETestTask.Weapons
 
             var newPosition = transform.position;
 
-            CheckForCollisions(previousPosition, newPosition, _hitResults);
-        }
-
-        /// <summary>
-        /// More reliable than OnCollisionEnter, as the other might miss colliisions. 
-        /// Also, commonly used in gamedev for that reason. 
-        /// It's raycasting from previous position to current and checking if it had any collisions since last position update.
-        /// </summary>
-        /// <param name="previousPosition"></param>
-        /// <param name="currentPosition"></param>
-        /// <returns></returns>
-        private bool CheckForCollisions(Vector3 previousPosition, Vector3 currentPosition, RaycastHit[] hitResults)
-        {
-            Vector3 direction = currentPosition - previousPosition;
-            float distance = direction.magnitude;
-
-            int hitCount = Physics.RaycastNonAlloc(previousPosition, direction, hitResults, distance);
-
-            if (hitCount == 0)
+            var hitCollider = RaycastExtensions.CheckForCollisionsSorted(previousPosition, newPosition, _hitResults);
+            if (hitCollider != null)
             {
-                return false;
-            }
-
-            RaycastHit[] notNullRaycastHits = new RaycastHit[hitCount];
-            int notNullCollidersIdx = 0;
-            for (int i = 0; i < hitResults.Length; i++) 
-            {
-                if (hitResults[i].collider != null)
+                var player = hitCollider.GetComponentNoAlloc<PlayerFacade>();
+                if (player != null)
                 {
-                    notNullRaycastHits[notNullCollidersIdx] = hitResults[i];
-                    notNullCollidersIdx++;
+                    Debug.Log($"Hit Player!!!");
                 }
-            }
+                else
+                {
+                    Debug.Log($"Hit something else {hitCollider.gameObject.name}");
+                }
 
-            // Sort the hits based on distance from previousPosition.
-            Array.Sort(notNullRaycastHits, (a, b) => a.distance.CompareTo(b.distance));
-            var firstHit = notNullRaycastHits[0];
-
-            var player = firstHit.collider.GetComponentNoAlloc<PlayerFacade>();
-            if (player != null)
-            {
-                Debug.Log($"Hit Player!!!");
+                Runner.Despawn(Object);
             }
-            else
-            {
-                Debug.Log($"Hit something else {firstHit.collider.gameObject.name}");
-            }
-
-            return true;
         }
     }
 }
