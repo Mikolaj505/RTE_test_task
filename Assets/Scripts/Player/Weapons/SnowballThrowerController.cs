@@ -9,6 +9,7 @@ namespace MKubiak.RTETestTask.Weapons
         [SerializeField] private WeaponConfig _config;
         [SerializeField] private NetworkPrefabRef _snowballPrefab;
         [SerializeField] private GameObject _heldSnowbalVisual;
+        [SerializeField] private Transform _throwOrigin;
 
         private bool _isHoldingASnowball;
 
@@ -60,8 +61,8 @@ namespace MKubiak.RTETestTask.Weapons
             if (Ammo > 0)
             {
                 Runner.Spawn(_snowballPrefab,
-                    _heldSnowbalVisual.transform.position,
-                    _heldSnowbalVisual.transform.rotation,
+                    _throwOrigin.position,
+                    _throwOrigin.rotation,
                     Object.InputAuthority,
                     (runner, networkObject) =>
                     {
