@@ -27,7 +27,7 @@ namespace MKubiak.RTETestTask.Weapons
             {
                 SetHeldSnowballVisualActive(true);
             }
-            else if (_isHoldingASnowball)
+            else if (Ammo <= 0 && _isHoldingASnowball)
             {
                 SetHeldSnowballVisualActive(false);
             }
