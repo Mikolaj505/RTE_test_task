@@ -15,8 +15,6 @@ namespace MKubiak.RTETestTask.InteractionSystem
         private InteractionSetRegisterer _setRegisterer;
         private bool _enabled = true;
 
-        private PlayerFacade _currentInteractor;
-
         private void Awake()
         {
             _setRegisterer = GetComponent<InteractionSetRegisterer>();
@@ -24,7 +22,16 @@ namespace MKubiak.RTETestTask.InteractionSystem
 
         public void Interact(PlayerFacade interactor)
         {
-            if (Runner.IsServer == false || CanInteract == false)
+            if (CanInteract == false)
+            {
+                return;
+            }
+
+            //Disable interaction immediely on the local player
+            OnDeselected(interactor);
+            CooldownTimeLeft = _interactionCooldown;
+
+            if (Runner.IsServer == false)
             {
                 return;
             }
@@ -39,7 +46,6 @@ namespace MKubiak.RTETestTask.InteractionSystem
                 return;
             }
 
-            _currentInteractor = interactor;
             _interactLabel.Show();
         }
 
@@ -50,7 +56,6 @@ namespace MKubiak.RTETestTask.InteractionSystem
                 return;
             }
 
-            _currentInteractor = null;
             _interactLabel.Hide();
         }
 
@@ -59,7 +64,7 @@ namespace MKubiak.RTETestTask.InteractionSystem
             return gameObject;
         }
 
-        public override void FixedUpdateNetwork()
+        public override void Render()
         {
             if (_enabled && CanInteract == false)
             {
@@ -69,8 +74,11 @@ namespace MKubiak.RTETestTask.InteractionSystem
             {
                 EnableInteraction();
             }
+        }
 
-            if (Runner.IsServer && CanInteract == false)
+        public override void FixedUpdateNetwork()
+        {
+            if (CanInteract == false)
             {
                 CooldownTimeLeft -= Runner.DeltaTime;
             }
@@ -85,12 +93,12 @@ namespace MKubiak.RTETestTask.InteractionSystem
         public void DisableInteraction()
         {
             _setRegisterer.UnregisterFromSet();
-            OnDeselected(_currentInteractor);
             _enabled = false;
         }
 
         private void HandleInteraction(PlayerFacade interactor)
         {
+            OnDeselected(interactor);
             CooldownTimeLeft = _interactionCooldown;
             Debug.Log($"We got interaction!!! {interactor.name}");
 
