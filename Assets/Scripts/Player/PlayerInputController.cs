@@ -53,6 +53,7 @@ namespace MKubiak.RTETestTask.Input
             _playerInput.Look += reversedLookInput;
             _playerInput.Interact |= _inputActions.PlayerMap.Interact.IsPressed();
             _playerInput.Fire |= _inputActions.PlayerMap.Fire.IsPressed();
+            _playerInput.ShowUI |= _inputActions.PlayerMap.ShowUI.IsPressed();
         }
 
         void IBeforeTick.BeforeTick() 

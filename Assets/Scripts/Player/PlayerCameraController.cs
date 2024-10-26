@@ -40,9 +40,4 @@ namespace MKubiak.RTETestTask
             _cameraTarget.localRotation = Quaternion.Euler(motorRotation.x * (_inversePitch ? -1f : 1f) , 0, 0);
         }
     }
-
-    public class Interaction : NetworkBehaviour, IKCCInteractionProvider
-    {
-        
-    }
 }

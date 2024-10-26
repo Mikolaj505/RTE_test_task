@@ -66,6 +66,8 @@ namespace MKubiak.RTETestTask
             {
                 ServiceLocator.Get<PlayerSpawner>().SpawnPlayer(runner, player);
             }
+
+            Signals.Get<OnPlayerJoinedSignal>().Dispatch(new OnPlayerJoinedSignalPayload(player));
         }
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)

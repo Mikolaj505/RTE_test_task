@@ -53,13 +53,18 @@ namespace MKubiak.RTETestTask.Weapons
 
         private void UpdateMidFlightCollisions(Vector3 previousPosition, Vector3 newPosition)
         {
+            if (Runner.IsServer == false)
+            {
+                return;
+            }
+
             var hitCollider = RaycastExtensions.CheckForCollisionsSorted(previousPosition, newPosition, _hitResults);
             if (hitCollider != null)
             {
                 var player = hitCollider.GetComponentNoAlloc<PlayerFacade>();
                 if (player != null)
                 {
-                    player.Health.TakeDamage(_damageToDeal);
+                    player.Health.TakeDamage(_damageToDeal, Object.InputAuthority);
                 }
                 else
                 {

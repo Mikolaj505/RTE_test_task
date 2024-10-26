@@ -487,7 +487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[1]
@@ -519,6 +519,14 @@ PrefabInstance:
       objectReference: {fileID: 5632533253027304382}
     - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[8]
+      value: 
+      objectReference: {fileID: 9165067421752387800}
+    - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[9]
+      value: 
+      objectReference: {fileID: 1354652117758024792}
+    - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[10]
       value: 
       objectReference: {fileID: 8985349584503867328}
     - target: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
@@ -598,6 +606,12 @@ PrefabInstance:
       addedObject: {fileID: 5632533253027304382}
     - targetCorrespondingSourceObject: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 9165067421752387800}
+    - targetCorrespondingSourceObject: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1354652117758024792}
+    - targetCorrespondingSourceObject: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 5427855250070356411}
   m_SourcePrefab: {fileID: 100100000, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
 --- !u!4 &4524655407572593186 stripped
@@ -637,6 +651,9 @@ MonoBehaviour:
   <Input>k__BackingField: {fileID: 8632772905129855658}
   <Weapons>k__BackingField: {fileID: 741880792595131386}
   <Health>k__BackingField: {fileID: 5632533253027304382}
+  <Camera>k__BackingField: {fileID: 5299204706033854093}
+  <Head>k__BackingField: {fileID: 6093319629406215290}
+  <Score>k__BackingField: {fileID: 1354652117758024792}
 --- !u!114 &8632772905129855658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,6 +733,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 100
+--- !u!114 &9165067421752387800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464555564920399013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d2c1544e3689648a054c71a98055ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1354652117758024792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464555564920399013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e5f14c35170ee47814364a27ed6a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Score: 0
 --- !u!136 &5427855250070356411
 CapsuleCollider:
   m_ObjectHideFlags: 0
