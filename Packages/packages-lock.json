@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "b6d122e7809c6529fb5a4b73d41a67ce1edac987"
     },
+    "com.intothedev.objectpooling": {
+      "version": "https://github.com/IntoTheDev/Object-Pooling-for-Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0c29114a1a29267e095913a49069508e298d4e40"
+    },
     "com.marijnzwemmer.unity-toolbar-extender": {
       "version": "https://github.com/marijnz/unity-toolbar-extender.git",
       "depth": 0,
