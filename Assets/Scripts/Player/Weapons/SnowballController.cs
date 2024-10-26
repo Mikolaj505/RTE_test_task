@@ -13,6 +13,8 @@ namespace MKubiak.RTETestTask.Weapons
         [SerializeField][Range(0, 1)] private float _gravityEffectWeight = 0.5f;
         [SerializeField] private int _maxRaycastHitsChecked = 15;
 
+        private float _damageToDeal;
+
         private TickTimer FlightTimer { get; set; }
 
         private RaycastHit[] _hitResults;
@@ -22,8 +24,9 @@ namespace MKubiak.RTETestTask.Weapons
             _hitResults = new RaycastHit[_maxRaycastHitsChecked];
         }
 
-        public void Fire()
+        public void Fire(float damage)
         {
+            _damageToDeal = damage;
             FlightTimer = TickTimer.CreateFromSeconds(Runner, _velocityEvaluationDuration);
         }
 
@@ -45,13 +48,18 @@ namespace MKubiak.RTETestTask.Weapons
 
             var newPosition = transform.position;
 
+            UpdateMidFlightCollisions(previousPosition, newPosition);
+        }
+
+        private void UpdateMidFlightCollisions(Vector3 previousPosition, Vector3 newPosition)
+        {
             var hitCollider = RaycastExtensions.CheckForCollisionsSorted(previousPosition, newPosition, _hitResults);
             if (hitCollider != null)
             {
                 var player = hitCollider.GetComponentNoAlloc<PlayerFacade>();
                 if (player != null)
                 {
-                    Debug.Log($"Hit Player!!!");
+                    player.Health.TakeDamage(_damageToDeal);
                 }
                 else
                 {

@@ -307,6 +307,10 @@ PrefabInstance:
       value: Weapons
       objectReference: {fileID: 0}
     - target: {fileID: 6181573494571252454, guid: 513f75baead5ce540806ffea07ffa7af, type: 3}
+      propertyPath: _damage
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181573494571252454, guid: 513f75baead5ce540806ffea07ffa7af, type: 3}
       propertyPath: _throwOrigin
       value: 
       objectReference: {fileID: 1429472294810481664}
@@ -483,7 +487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[1]
@@ -511,6 +515,10 @@ PrefabInstance:
       objectReference: {fileID: 741880792595131386}
     - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[7]
+      value: 
+      objectReference: {fileID: 5632533253027304382}
+    - target: {fileID: -1029249225945322823, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[8]
       value: 
       objectReference: {fileID: 8985349584503867328}
     - target: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
@@ -587,6 +595,9 @@ PrefabInstance:
       addedObject: {fileID: 741880792595131386}
     - targetCorrespondingSourceObject: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5632533253027304382}
+    - targetCorrespondingSourceObject: {fileID: 3467749930922983645, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 5427855250070356411}
   m_SourcePrefab: {fileID: 100100000, guid: 9d631177f90b9ba49bc00a53b3478fa2, type: 3}
 --- !u!4 &4524655407572593186 stripped
@@ -625,6 +636,7 @@ MonoBehaviour:
   <Motor>k__BackingField: {fileID: 5542947587368128673}
   <Input>k__BackingField: {fileID: 8632772905129855658}
   <Weapons>k__BackingField: {fileID: 741880792595131386}
+  <Health>k__BackingField: {fileID: 5632533253027304382}
 --- !u!114 &8632772905129855658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,6 +703,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c8b3722703fc84cbba78496dc944f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5632533253027304382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464555564920399013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f49059140dab9469927c2f1c90c49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Health>k__BackingField: 100
 --- !u!136 &5427855250070356411
 CapsuleCollider:
   m_ObjectHideFlags: 0

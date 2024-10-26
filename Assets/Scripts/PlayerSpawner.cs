@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace MKubiak.RTETestTask
 {
+    // TODOMK: Rename to PlayerSpawnerService
     public class PlayerSpawner : MonoBehaviour
     {
         [SerializeField] private List<Transform> _spawnPoints = new();

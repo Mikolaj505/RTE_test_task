@@ -10,6 +10,7 @@ namespace MKubiak.RTETestTask.Weapons
         [SerializeField] private NetworkPrefabRef _snowballPrefab;
         [SerializeField] private GameObject _heldSnowbalVisual;
         [SerializeField] private Transform _throwOrigin;
+        [SerializeField] private float _damage;
 
         private bool _isHoldingASnowball;
 
@@ -66,7 +67,7 @@ namespace MKubiak.RTETestTask.Weapons
                     Object.InputAuthority,
                     (runner, networkObject) =>
                     {
-                        networkObject.GetComponentNoAlloc<SnowballController>().Fire();
+                        networkObject.GetComponentNoAlloc<SnowballController>().Fire(_damage);
                     }
                     );
 

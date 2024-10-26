@@ -11,6 +11,7 @@ namespace MKubiak.RTETestTask
         [field: SerializeField] public KCC Motor { get; private set; }
         [field: SerializeField] public PlayerInputController Input { get; private set; }
         [field: SerializeField] public PlayerWeaponsController Weapons { get; private set; }
+        [field: SerializeField] public PlayerHealthController Health { get; private set; }
 
         private PlayersService PlayersService => ServiceLocator.Get<PlayersService>();
 
