@@ -326,6 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e325dec982bc949be4259842f59eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttonsToDisableOnGameStart:
+  - {fileID: 2390144259792569820}
+  - {fileID: 428042007892929574}
   _scenesToLoadAtGameplayStart: 0200000003000000
 --- !u!1 &3335714487639117480
 GameObject:
