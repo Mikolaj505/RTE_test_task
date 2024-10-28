@@ -71,7 +71,7 @@ namespace MKubiak.RTETestTask.Weapons
                 }
                 else
                 {
-                    Debug.Log($"Hit something else {_hitResults[0].collider.gameObject.name}");
+                    //Hit something else, for now, do nothing with it.
                 }
 
                 Runner.Despawn(Object);

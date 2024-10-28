@@ -71,7 +71,6 @@ namespace MKubiak.RTETestTask.Weapons
                     }
                     );
 
-                Debug.Log($"Fire!!!");
                 Ammo--;
             }
         }
