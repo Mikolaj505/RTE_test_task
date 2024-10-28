@@ -31,7 +31,7 @@ namespace MKubiak.RTETestTask
             }
         }
 
-        public override void Render()
+        public override void FixedUpdateNetwork()
         {
             if (_inputController.WasActivated(PlayerInputAction.Interact))
             {

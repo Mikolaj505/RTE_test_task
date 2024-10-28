@@ -55,6 +55,24 @@ namespace MKubiak.RTETestTask.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1f5c29c-6c60-4649-9505-153b3bb1c36e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b7d132c-9cb9-42d2-8266-b3e2f36b795e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +152,28 @@ namespace MKubiak.RTETestTask.Input
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71338acf-7cd6-4f08-9f78-41e1826f4aab"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac510985-b2a6-49fa-b1e4-63eadde519db"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -145,6 +185,8 @@ namespace MKubiak.RTETestTask.Input
             m_PlayerMap_Movement = m_PlayerMap.FindAction("Movement", throwIfNotFound: true);
             m_PlayerMap_Look = m_PlayerMap.FindAction("Look", throwIfNotFound: true);
             m_PlayerMap_Interact = m_PlayerMap.FindAction("Interact", throwIfNotFound: true);
+            m_PlayerMap_Fire = m_PlayerMap.FindAction("Fire", throwIfNotFound: true);
+            m_PlayerMap_ShowUI = m_PlayerMap.FindAction("ShowUI", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -209,6 +251,8 @@ namespace MKubiak.RTETestTask.Input
         private readonly InputAction m_PlayerMap_Movement;
         private readonly InputAction m_PlayerMap_Look;
         private readonly InputAction m_PlayerMap_Interact;
+        private readonly InputAction m_PlayerMap_Fire;
+        private readonly InputAction m_PlayerMap_ShowUI;
         public struct PlayerMapActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -216,6 +260,8 @@ namespace MKubiak.RTETestTask.Input
             public InputAction @Movement => m_Wrapper.m_PlayerMap_Movement;
             public InputAction @Look => m_Wrapper.m_PlayerMap_Look;
             public InputAction @Interact => m_Wrapper.m_PlayerMap_Interact;
+            public InputAction @Fire => m_Wrapper.m_PlayerMap_Fire;
+            public InputAction @ShowUI => m_Wrapper.m_PlayerMap_ShowUI;
             public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -234,6 +280,12 @@ namespace MKubiak.RTETestTask.Input
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+                @ShowUI.started += instance.OnShowUI;
+                @ShowUI.performed += instance.OnShowUI;
+                @ShowUI.canceled += instance.OnShowUI;
             }
 
             private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -247,6 +299,12 @@ namespace MKubiak.RTETestTask.Input
                 @Interact.started -= instance.OnInteract;
                 @Interact.performed -= instance.OnInteract;
                 @Interact.canceled -= instance.OnInteract;
+                @Fire.started -= instance.OnFire;
+                @Fire.performed -= instance.OnFire;
+                @Fire.canceled -= instance.OnFire;
+                @ShowUI.started -= instance.OnShowUI;
+                @ShowUI.performed -= instance.OnShowUI;
+                @ShowUI.canceled -= instance.OnShowUI;
             }
 
             public void RemoveCallbacks(IPlayerMapActions instance)
@@ -269,6 +327,8 @@ namespace MKubiak.RTETestTask.Input
             void OnMovement(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnFire(InputAction.CallbackContext context);
+            void OnShowUI(InputAction.CallbackContext context);
         }
     }
 }

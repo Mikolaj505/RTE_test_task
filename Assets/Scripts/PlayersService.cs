@@ -1,4 +1,5 @@
-﻿using MKubiak.Services;
+﻿using Fusion;
+using MKubiak.Services;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,18 @@ namespace MKubiak.RTETestTask
         public void UnregisterPlayer(PlayerFacade player)
         {
             Players.Remove(player);
+        }
+
+        public PlayerFacade GetPlayer(PlayerRef playerRef)
+        {
+            foreach (var player in Players)
+            {
+                if (player.Object.InputAuthority == playerRef)
+                {
+                    return player;
+                }
+            }
+            return null;
         }
     }
 }

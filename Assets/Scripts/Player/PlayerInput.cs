@@ -10,10 +10,14 @@ namespace MKubiak.RTETestTask.Input
         public NetworkButtons Actions;
 
         public bool Interact { get { return Actions.IsSet(PlayerInputAction.Interact); } set { Actions.Set(PlayerInputAction.Interact, value); } }
+        public bool Fire { get { return Actions.IsSet(PlayerInputAction.Fire); } set { Actions.Set(PlayerInputAction.Fire, value); } }
+        public bool ShowUI { get { return Actions.IsSet(PlayerInputAction.ShowUI); } set { Actions.Set(PlayerInputAction.ShowUI, value); } }
     }
 
     public enum PlayerInputAction
     {
         Interact = 1,
+        Fire = 2,
+        ShowUI = 3,
     }
 }
