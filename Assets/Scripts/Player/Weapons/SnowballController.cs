@@ -17,7 +17,7 @@ namespace MKubiak.RTETestTask.Weapons
         [SerializeField] private GameObject _puffVFX;
 
         private float _damageToDeal;
-
+        private Vector3 _gravityVelocity;
         private TickTimer FlightTimer { get; set; }
 
         private RaycastHit[] _hitResults;
@@ -46,8 +46,8 @@ namespace MKubiak.RTETestTask.Weapons
             var previousPosition = transform.position;
 
             var currentTickVelocity = _velocity * evaluatedVelocityFactor;
-            transform.position += currentTickVelocity * transform.forward * Runner.DeltaTime;
-            transform.position += Physics.gravity * _gravityEffectWeight * Runner.DeltaTime;
+            _gravityVelocity += Physics.gravity * _gravityEffectWeight * Runner.DeltaTime;
+            transform.position += (currentTickVelocity * transform.forward * Runner.DeltaTime) + _gravityVelocity;
 
             var newPosition = transform.position;
 
