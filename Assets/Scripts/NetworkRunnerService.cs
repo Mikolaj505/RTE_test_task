@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace MKubiak.RTETestTask
 {
-    public class NetworkRunnerService : MonoBehaviour, INetworkRunnerCallbacks
+    public class NetworkRunnerService : MonoBehaviour, INetworkRunnerCallbacks, INetworkRunnerService
     {
         [SerializeField] private NetworkRunner _networkRunnerPrefab;
 
@@ -23,12 +23,12 @@ namespace MKubiak.RTETestTask
 
         private void OnEnable()
         {
-            ServiceLocator.Register<NetworkRunnerService>(this);
+            ServiceLocator.Register<INetworkRunnerService>(this);
         }
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<NetworkRunnerService>();
+            ServiceLocator.Unregister<INetworkRunnerService>();
         }
 
         public void DestroyNetworkRunner()

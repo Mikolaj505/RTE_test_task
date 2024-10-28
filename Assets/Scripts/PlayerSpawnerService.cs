@@ -5,20 +5,19 @@ using UnityEngine;
 
 namespace MKubiak.RTETestTask
 {
-    // TODOMK: Rename to PlayerSpawnerService
-    public class PlayerSpawner : MonoBehaviour
+    public class PlayerSpawnerService : MonoBehaviour, IPlayerSpawnerService
     {
         [SerializeField] private List<Transform> _spawnPoints = new();
         [SerializeField] private NetworkPrefabRef _playerPrefab;
 
         private void OnEnable()
         {
-            ServiceLocator.Register<PlayerSpawner>(this);
+            ServiceLocator.Register<IPlayerSpawnerService>(this);
         }
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<PlayerSpawner>();
+            ServiceLocator.Unregister<IPlayerSpawnerService>();
         }
 
         public void SpawnPlayer(NetworkRunner runner, PlayerRef player)
@@ -30,7 +29,7 @@ namespace MKubiak.RTETestTask
 
         private Transform GetMostAlienatedSpawnPoint()
         {
-            var players = ServiceLocator.Get<PlayersService>().Players;
+            var players = ServiceLocator.Get<IPlayersService>().GetPlayers();
             Transform furthestSpawnPoint = null;
             float maxDistance = float.MinValue;
 

@@ -8,6 +8,11 @@ namespace MKubiak.RTETestTask.PlayerUI
 
         public void Position(PlayerFacade player)
         {
+            if (player == null)
+            {
+                return;
+            }
+
             var targetTransform = player.Head;
 
             Vector3 offsetInWorldSpace =

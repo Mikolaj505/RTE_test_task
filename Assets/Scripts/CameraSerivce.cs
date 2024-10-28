@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace MKubiak.RTETestTask
 {
-    public class CameraSerivce : MonoBehaviour
+    public class CameraSerivce : MonoBehaviour, ICameraService
     {
         [field: SerializeField] public CinemachineVirtualCamera PlayerCamera { get; private set; }
         [field: SerializeField] public CinemachineVirtualCamera SceneCamera { get; private set; }
 
         private void OnEnable()
         {
-            ServiceLocator.Register<CameraSerivce>(this);
+            ServiceLocator.Register<ICameraService>(this);
         }
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<CameraSerivce>();
+            ServiceLocator.Unregister<ICameraService>();
         }
 
         public void AssignPlayerCamera(Transform targetToFollow)

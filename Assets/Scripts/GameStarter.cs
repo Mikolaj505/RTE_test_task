@@ -8,8 +8,8 @@ namespace MKubiak.RTETestTask.GameStartup
     {
         public async void StartGame(GameStartInfo gameStartInfo)
         {
-            var networkRunner = ServiceLocator.Get<NetworkRunnerService>().CreateNetworkRunner();
-            var sceneManager = ServiceLocator.Get<NetworkSceneManagerService>().NetworkSceneManager;
+            var networkRunner = ServiceLocator.Get<INetworkRunnerService>().CreateNetworkRunner();
+            var sceneManager = ServiceLocator.Get<INetworkSceneService>().GetNetworkSceneManager();
             networkRunner.ProvideInput = true;
 
             await networkRunner.StartGame(new StartGameArgs()

@@ -3,23 +3,20 @@ using UnityEngine;
 
 namespace MKubiak.RTETestTask.PlayerUI
 {
-    public class PlayerUIService : MonoBehaviour
+    public class PlayerUIService : MonoBehaviour, IPlayerUIService
     {
         [SerializeField] private PlayerMenuController _playerMenu;
 
         private void OnEnable()
         {
-            ServiceLocator.Register<PlayerUIService>(this);
+            ServiceLocator.Register<IPlayerUIService>(this);
         }
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<PlayerUIService>();
+            ServiceLocator.Unregister<IPlayerUIService>();
         }
 
-        /// <param name="player"> 
-        /// Player for which menu shall show data.
-        /// </param>
         public void ShowMenu(PlayerFacade player)
         {
             _playerMenu.SetPlayer(player);

@@ -25,7 +25,7 @@ namespace MKubiak.RTETestTask
                 return;
             }
 
-            ServiceLocator.Get<CameraSerivce>().AssignPlayerCamera(_cameraTarget);
+            ServiceLocator.Get<ICameraService>().AssignPlayerCamera(_cameraTarget);
         }
 
         public override void Render()

@@ -33,7 +33,7 @@ namespace MKubiak.RTETestTask
             Signals.Get<PlayerKilledSignal>().Dispatch(new PlayerKilledSignalPayload(deathCauser, Object.InputAuthority));
 
             // For now, immedietly respawn player
-            ServiceLocator.Get<PlayerSpawner>().SpawnPlayer(Runner, Object.InputAuthority);
+            ServiceLocator.Get<IPlayerSpawnerService>().SpawnPlayer(Runner, Object.InputAuthority);
             Runner.Despawn(Object);
         }
     }

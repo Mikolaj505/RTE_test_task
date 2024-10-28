@@ -25,11 +25,11 @@ namespace MKubiak.RTETestTask
         {
             if (_inputController.NetworkInput.ShowUI)
             {
-                ServiceLocator.Get<PlayerUIService>().ShowMenu(_playerFacade);
+                ServiceLocator.Get<IPlayerUIService>().ShowMenu(_playerFacade);
             }
             else
             {
-                ServiceLocator.Get<PlayerUIService>().HideMenu();
+                ServiceLocator.Get<IPlayerUIService>().HideMenu();
             }
         }
     }

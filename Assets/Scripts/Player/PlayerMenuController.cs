@@ -1,4 +1,5 @@
-﻿using MKubiak.Services;
+﻿using Fusion;
+using MKubiak.Services;
 using TMPro;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace MKubiak.RTETestTask.PlayerUI
         public void RefreshPlayerMenu()
         {
             float score = 0f;
-            if (ServiceLocator.Get<MatchService>().TryGetPlayerStatistics(_player.Object.InputAuthority, out PlayerStatistics playerStatistics))
+            if (ServiceLocator.Get<IMatchService>().TryGetPlayerStatistics(_player?.Object.InputAuthority ?? PlayerRef.None, out PlayerStatistics playerStatistics))
             {
                 score = playerStatistics.Score;
             }
