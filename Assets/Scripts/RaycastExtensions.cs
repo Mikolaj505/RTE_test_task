@@ -13,7 +13,7 @@ namespace MKubiak.RTETestTask
         /// <param name="previousPosition"></param>
         /// <param name="currentPosition"></param>
         /// <returns></returns>
-        public static Collider CheckForCollisionsSorted(Vector3 previousPosition, Vector3 currentPosition, RaycastHit[] hitResults)
+        public static int CheckForCollisionsSorted(Vector3 previousPosition, Vector3 currentPosition, RaycastHit[] hitResults)
         {
             Vector3 direction = currentPosition - previousPosition;
             float distance = direction.magnitude;
@@ -22,7 +22,7 @@ namespace MKubiak.RTETestTask
 
             if (hitCount == 0)
             {
-                return null;
+                return hitCount;
             }
 
             RaycastHit[] notNullRaycastHits = new RaycastHit[hitCount];
@@ -38,10 +38,11 @@ namespace MKubiak.RTETestTask
 
             // Sort the hits based on distance from previousPosition.
             Array.Sort(notNullRaycastHits, (a, b) => a.distance.CompareTo(b.distance));
-            var firstHit = notNullRaycastHits[0];
 
+            // Copy all sorted valid hits back to hitResults.
+            Array.Copy(notNullRaycastHits, hitResults, hitCount);
 
-            return firstHit.collider;
+            return hitCount;
         }
     }
 }

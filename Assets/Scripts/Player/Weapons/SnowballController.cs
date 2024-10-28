@@ -2,6 +2,7 @@
 using Fusion.Addons.KCC;
 using System;
 using UnityEngine;
+using ToolBox.Pools;
 
 namespace MKubiak.RTETestTask.Weapons
 {
@@ -12,6 +13,8 @@ namespace MKubiak.RTETestTask.Weapons
         [SerializeField] private float _velocity;
         [SerializeField][Range(0, 1)] private float _gravityEffectWeight = 0.5f;
         [SerializeField] private int _maxRaycastHitsChecked = 15;
+
+        [SerializeField] private GameObject _puffVFX;
 
         private float _damageToDeal;
 
@@ -58,21 +61,26 @@ namespace MKubiak.RTETestTask.Weapons
                 return;
             }
 
-            var hitCollider = RaycastExtensions.CheckForCollisionsSorted(previousPosition, newPosition, _hitResults);
-            if (hitCollider != null)
+            var hitCount = RaycastExtensions.CheckForCollisionsSorted(previousPosition, newPosition, _hitResults);
+            if (hitCount > 0)
             {
-                var player = hitCollider.GetComponentNoAlloc<PlayerFacade>();
+                var player = _hitResults[0].collider.GetComponentNoAlloc<PlayerFacade>();
                 if (player != null)
                 {
                     player.Health.TakeDamage(_damageToDeal, Object.InputAuthority);
                 }
                 else
                 {
-                    Debug.Log($"Hit something else {hitCollider.gameObject.name}");
+                    Debug.Log($"Hit something else {_hitResults[0].collider.gameObject.name}");
                 }
 
                 Runner.Despawn(Object);
             }
+        }
+
+        public override void Despawned(NetworkRunner runner, bool hasState)
+        {
+            _puffVFX.Reuse(transform.position, Quaternion.identity);
         }
     }
 }

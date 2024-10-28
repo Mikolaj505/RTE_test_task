@@ -83,6 +83,8 @@ MonoBehaviour:
   _velocityEvaluationDuration: 2
   _velocity: 22.5
   _gravityEffectWeight: 0.1
+  _maxRaycastHitsChecked: 15
+  _puffVFX: {fileID: 1820376124720663862, guid: c1399c7337c0ead4ca0406dc46ac3a51, type: 3}
 --- !u!114 &2584708322306272735
 MonoBehaviour:
   m_ObjectHideFlags: 0
