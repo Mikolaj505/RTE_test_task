@@ -11,7 +11,7 @@ namespace MKubiak.RTETestTask.Weapons
         [SerializeField] private AnimationCurve _forwardVelocityCurve;
         [SerializeField] private float _velocityEvaluationDuration;
         [SerializeField] private float _velocity;
-        [SerializeField][Range(0, 1)] private float _gravityEffectWeight = 0.5f;
+        [SerializeField] private float _gravityEffectWeight = 0.5f;
         [SerializeField] private int _maxRaycastHitsChecked = 15;
 
         [SerializeField] private GameObject _puffVFX;

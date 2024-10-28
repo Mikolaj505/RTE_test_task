@@ -50,10 +50,10 @@ namespace MKubiak.RTETestTask.Input
         public override void Render()
         {
             var lookInput = _inputActions.PlayerMap.Look.ReadValue<Vector2>() * _mouseSensitivity;
-            var reversedLookInput = new Vector2(lookInput.y, lookInput.x);
+            var swappedLookInput = new Vector2(lookInput.y, lookInput.x);
 
             _playerInput.Movement = _inputActions.PlayerMap.Movement.ReadValue<Vector2>();
-            _playerInput.Look += reversedLookInput;
+            _playerInput.Look += swappedLookInput;
             _playerInput.Interact |= _inputActions.PlayerMap.Interact.IsPressed();
             _playerInput.Fire |= _inputActions.PlayerMap.Fire.IsPressed();
             _playerInput.ShowUI |= _inputActions.PlayerMap.ShowUI.IsPressed();

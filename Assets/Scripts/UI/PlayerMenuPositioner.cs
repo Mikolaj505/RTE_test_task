@@ -14,13 +14,7 @@ namespace MKubiak.RTETestTask.PlayerUI
             }
 
             var targetTransform = player.Head;
-
-            Vector3 offsetInWorldSpace =
-                   targetTransform.right * _localSpaceOffset.x +
-                   targetTransform.up * _localSpaceOffset.y +
-                   targetTransform.forward * _localSpaceOffset.z;
-
-            transform.position = targetTransform.position + offsetInWorldSpace;
+            transform.position = targetTransform.GetPositionWithLocalSpaceOffest(_localSpaceOffset);
         }
     }
 }

@@ -51,38 +51,38 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0.9973755
-      inSlope: -0.014615173
-      outSlope: -0.014615173
+      time: -0.0022010803
+      value: 1
+      inSlope: -4.793622
+      outSlope: -4.793622
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.20887162
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.8270088
-      value: 0.51102674
-      inSlope: -1.7987571
-      outSlope: -2.462971
-      tangentMode: 1
+      time: 0.3232334
+      value: 0.17612384
+      inSlope: -0.64801663
+      outSlope: -0.64801663
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.17621379
-      outWeight: 0.5891278
+      inWeight: 0.48064768
+      outWeight: 0.16497381
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -4.125629
-      outSlope: -4.125629
+      inSlope: -0.07601286
+      outSlope: -0.07601286
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.3805392
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   _velocityEvaluationDuration: 2
-  _velocity: 22.5
-  _gravityEffectWeight: 0.1
+  _velocity: 92.7
+  _gravityEffectWeight: 1.5
   _maxRaycastHitsChecked: 15
   _puffVFX: {fileID: 1820376124720663862, guid: c1399c7337c0ead4ca0406dc46ac3a51, type: 3}
 --- !u!114 &2584708322306272735
