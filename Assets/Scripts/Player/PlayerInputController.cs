@@ -21,6 +21,9 @@ namespace MKubiak.RTETestTask.Input
         {
             _inputActions = new PlayerInputActions();
             _inputActions.PlayerMap.Enable();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         public override void Spawned()
@@ -34,7 +37,7 @@ namespace MKubiak.RTETestTask.Input
 
         public override void Despawned(NetworkRunner runner, bool hasState)
         {
-                Signals.Get<OnInputSignal>().RemoveListener(OnInput);
+            Signals.Get<OnInputSignal>().RemoveListener(OnInput);
         }
 
         private void OnInput(NetworkRunner runner, NetworkInput networkInput)
@@ -56,7 +59,7 @@ namespace MKubiak.RTETestTask.Input
             _playerInput.ShowUI |= _inputActions.PlayerMap.ShowUI.IsPressed();
         }
 
-        void IBeforeTick.BeforeTick() 
+        public void BeforeTick() 
         {
             _previousNetworkInput = _networkInput;
 
