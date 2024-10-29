@@ -16,7 +16,7 @@ namespace MKubiak.RTETestTask
         [field: SerializeField] public Transform Head { get; private set; }
         [field: SerializeField] public PlayerScoreController Score { get; private set; }
 
-        private PlayersService PlayersService => ServiceLocator.Get<PlayersService>();
+        private IPlayersService PlayersService => ServiceLocator.Get<IPlayersService>();
 
         public override void Spawned()
         {

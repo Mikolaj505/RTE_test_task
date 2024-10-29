@@ -64,7 +64,7 @@ namespace MKubiak.RTETestTask
         {
             if (runner.IsServer)
             {
-                ServiceLocator.Get<PlayerSpawner>().SpawnPlayer(runner, player);
+                ServiceLocator.Get<IPlayerSpawnerService>().SpawnPlayer(runner, player);
             }
 
             Signals.Get<OnPlayerJoinedSignal>().Dispatch(new OnPlayerJoinedSignalPayload(player));

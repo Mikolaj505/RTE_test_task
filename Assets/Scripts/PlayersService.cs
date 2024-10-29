@@ -1,22 +1,23 @@
 ﻿using Fusion;
 using MKubiak.Services;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MKubiak.RTETestTask
 {
-    public class PlayersService : MonoBehaviour
+    public class PlayersService : MonoBehaviour, IPlayersService
     {
-        public List<PlayerFacade> Players { get; private set; } = new();
+        private List<PlayerFacade> Players { get; set; } = new();
 
         private void OnEnable()
         {
-            ServiceLocator.Register<PlayersService>(this);
+            ServiceLocator.Register<IPlayersService>(this);
         }
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<PlayersService>();
+            ServiceLocator.Unregister<IPlayersService>();
         }
 
         public void RegisterPlayer(PlayerFacade player)
@@ -39,6 +40,12 @@ namespace MKubiak.RTETestTask
                 }
             }
             return null;
+        }
+
+        public IEnumerable<PlayerFacade> GetPlayers()
+        {
+            // Return a copy.
+            return Players.ToList();
         }
     }
 }

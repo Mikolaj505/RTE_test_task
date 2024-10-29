@@ -8,7 +8,6 @@ namespace MKubiak.RTETestTask
     public class PlayerCameraController : NetworkBehaviour
     {
         [SerializeField] private Transform _cameraTarget;
-        [SerializeField] private bool _inversePitch;
 
         private KCC _motor;
 
@@ -25,7 +24,7 @@ namespace MKubiak.RTETestTask
                 return;
             }
 
-            ServiceLocator.Get<CameraSerivce>().AssignPlayerCamera(_cameraTarget);
+            ServiceLocator.Get<ICameraService>().AssignPlayerCamera(_cameraTarget);
         }
 
         public override void Render()
@@ -35,9 +34,8 @@ namespace MKubiak.RTETestTask
                 return;
             }
 
-            // '-' so the pitch normally comes as input up is camera going up, and input down is camera going down. If preferred, it can be reverted with _inversePitch.
-            var motorRotation = -_motor.GetLookRotation();
-            _cameraTarget.localRotation = Quaternion.Euler(motorRotation.x * (_inversePitch ? -1f : 1f) , 0, 0);
+            var motorRotation = _motor.GetLookRotation();
+            _cameraTarget.localRotation = Quaternion.Euler(motorRotation.x , 0, 0);
         }
     }
 }

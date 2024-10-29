@@ -10,13 +10,21 @@ namespace MKubiak.RTETestTask.Weapons
         [SerializeField] private NetworkPrefabRef _snowballPrefab;
         [SerializeField] private GameObject _heldSnowbalVisual;
         [SerializeField] private Transform _throwOrigin;
+        [SerializeField] private float _throwForwardOffset;
         [SerializeField] private float _damage;
+
+        private PlayerFacade _playerFacade;
 
         private bool _isHoldingASnowball;
 
         [Networked] private float Ammo {get; set;}
 
         private float _ammoToAddNextTick;
+
+        private void Awake()
+        {
+            _playerFacade = GetComponentInParent<PlayerFacade>();
+        }
 
         public void AddAmmo(float amount)
         {
@@ -61,17 +69,18 @@ namespace MKubiak.RTETestTask.Weapons
 
             if (Ammo > 0)
             {
+                var throwRotation = Quaternion.AngleAxis(_playerFacade.Motor.GetLookRotation().x, _throwOrigin.right) * _throwOrigin.rotation;
+                var throwForwardDirection = throwRotation * Vector3.forward;
+
                 Runner.Spawn(_snowballPrefab,
-                    _throwOrigin.position,
-                    _throwOrigin.rotation,
+                    _throwOrigin.position + throwForwardDirection * _throwForwardOffset,
+                    throwRotation,
                     Object.InputAuthority,
                     (runner, networkObject) =>
                     {
                         networkObject.GetComponentNoAlloc<SnowballController>().Fire(_damage);
-                    }
-                    );
+                    });
 
-                Debug.Log($"Fire!!!");
                 Ammo--;
             }
         }

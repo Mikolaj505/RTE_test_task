@@ -21,6 +21,13 @@
       "dependencies": {},
       "hash": "dbd76ed996483d219c39d240f785b1790aa039ed"
     },
+    "com.mikolaj505.yasirkula.ingamedebugconsole": {
+      "version": "https://github.com/Mikolaj505/UnityIngameDebugConsole_SaveCommands.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ee566b331c9e511bc87c6d114885a2e34ef9d9db"
+    },
     "com.unity.cinemachine": {
       "version": "2.9.7",
       "depth": 0,

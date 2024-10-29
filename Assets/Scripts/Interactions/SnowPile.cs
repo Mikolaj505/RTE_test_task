@@ -101,7 +101,6 @@ namespace MKubiak.RTETestTask.InteractionSystem
 
         private void HandleInteraction(PlayerFacade interactor)
         {
-            Debug.Log($"We got interaction!!! {interactor.name}");
             DisableInteraction();
             interactor.Weapons.GetWeapon(_snowThrowerWeaponConfig.ID).AddAmmo(_ammoToAdd);
         }

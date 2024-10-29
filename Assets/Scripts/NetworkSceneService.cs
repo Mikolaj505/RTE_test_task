@@ -1,12 +1,10 @@
 ﻿using Fusion;
 using MKubiak.Services;
-using System.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace MKubiak.RTETestTask
 {
-    public class NetworkSceneManagerService : MonoBehaviour
+    public class NetworkSceneService : MonoBehaviour, INetworkSceneService
     {
         public INetworkSceneManager NetworkSceneManager { get; private set; }
 
@@ -17,12 +15,14 @@ namespace MKubiak.RTETestTask
 
         private void OnEnable()
         {
-            ServiceLocator.Register<NetworkSceneManagerService>(this);
+            ServiceLocator.Register<INetworkSceneService>(this);
         }
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<NetworkSceneManagerService>();
+            ServiceLocator.Unregister<INetworkSceneService>();
         }
+
+        public INetworkSceneManager GetNetworkSceneManager() => NetworkSceneManager;
     }
 }

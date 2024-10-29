@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace MKubiak.Services
 {
-
     public static class ServiceLocator
     {
         private static readonly Dictionary<Type, object> _services = new();

@@ -11,13 +11,13 @@ namespace MKubiak.RTETestTask.Weapons
         [SerializeField] private AnimationCurve _forwardVelocityCurve;
         [SerializeField] private float _velocityEvaluationDuration;
         [SerializeField] private float _velocity;
-        [SerializeField][Range(0, 1)] private float _gravityEffectWeight = 0.5f;
+        [SerializeField] private float _gravityEffectWeight = 0.5f;
         [SerializeField] private int _maxRaycastHitsChecked = 15;
 
         [SerializeField] private GameObject _puffVFX;
 
         private float _damageToDeal;
-
+        private Vector3 _gravityVelocity;
         private TickTimer FlightTimer { get; set; }
 
         private RaycastHit[] _hitResults;
@@ -46,8 +46,8 @@ namespace MKubiak.RTETestTask.Weapons
             var previousPosition = transform.position;
 
             var currentTickVelocity = _velocity * evaluatedVelocityFactor;
-            transform.position += currentTickVelocity * transform.forward * Runner.DeltaTime;
-            transform.position += Physics.gravity * _gravityEffectWeight * Runner.DeltaTime;
+            _gravityVelocity += Physics.gravity * _gravityEffectWeight * Runner.DeltaTime;
+            transform.position += (currentTickVelocity * transform.forward * Runner.DeltaTime) + _gravityVelocity;
 
             var newPosition = transform.position;
 
@@ -71,7 +71,7 @@ namespace MKubiak.RTETestTask.Weapons
                 }
                 else
                 {
-                    Debug.Log($"Hit something else {_hitResults[0].collider.gameObject.name}");
+                    //Hit something else, for now, do nothing with it.
                 }
 
                 Runner.Despawn(Object);
