@@ -71,7 +71,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _velocityEvaluationDuration: 200
+  _velocityEvaluationDuration: 3
   _velocity: 35
   _gravityEffectWeight: 0.08
   _maxRaycastHitsChecked: 15
